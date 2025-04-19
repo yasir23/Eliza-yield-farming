@@ -466,7 +466,7 @@ General Code Fixes & Minor Enhancements
 * fix: docker images+compose and broken documentation by @JoeyKhd in https://github.com/elizaOS/eliza/pull/2347
 * Fix github client README.md by @thomasWos in https://github.com/elizaOS/eliza/pull/2346
 * feat: groq image vision provider by @rferrari in https://github.com/elizaOS/eliza/pull/2342
-* improvement: using strict types to avoid erorrs like issue 2164 by @ai16z-demirix in https://github.com/elizaOS/eliza/pull/2220
+* improvement: using strict types to avoid errors like issue 2164 by @ai16z-demirix in https://github.com/elizaOS/eliza/pull/2220
 * fix: formatting in Browser section of README.md by @derrekcoleman in https://github.com/elizaOS/eliza/pull/2336
 * Update README_TR.md by @sukrucildirr in https://github.com/elizaOS/eliza/pull/2334
 * feat: (ragKnowledge) Enhance RAG knowledge handling by @augchan42 in https://github.com/elizaOS/eliza/pull/2351
@@ -1061,10 +1061,10 @@ General Code Fixes & Minor Enhancements
 - prevent repeated login by reusing client-twitter session #2129
 - fix the chat stuck in infinite loop #1755
 - fix client-discord join voice action #2160
-- replace invalid toghether ai medium model #2173
+- replace invalid together ai medium model #2173
 - insert missing langdetect on plugin-tts package.json #2175
 - Apply model settings for images and remove duplicate files #2118
-- clientConfig.telegram.isPartOfTeam misstype #2103
+- clientConfig.telegram.isPartOfTeam mistype #2103
 - fix starknet plugin by replacing walletProvider with portfolio provider #2029
 - correct SUI/USD price calculation #2150
 - deepseek support in getTokenForProvider #2179
@@ -1229,7 +1229,7 @@ Complete changelog:
 * feat: Add Irys plugin by @Hugo-SEQUIER in https://github.com/elizaOS/eliza/pull/1708
 * fix: Fix plugin loading from a character.json file by @treppers in https://github.com/elizaOS/eliza/pull/2095
 * feat: add Heurist embedding model by @tsubasakong in https://github.com/elizaOS/eliza/pull/2093
-* fix: clientConfig.telegram.isPartOfTeam misstype by @rferrari in https://github.com/elizaOS/eliza/pull/2103
+* fix: clientConfig.telegram.isPartOfTeam mistype by @rferrari in https://github.com/elizaOS/eliza/pull/2103
 * docs: Add Verified Inference docs by @maciejwitowski in https://github.com/elizaOS/eliza/pull/2125
 * fix: Update clients.md to fix package name by @prasadabhishek in https://github.com/elizaOS/eliza/pull/2091
 * feat: support autonome platform by @autonome-ai in https://github.com/elizaOS/eliza/pull/2121
@@ -1267,7 +1267,7 @@ Complete changelog:
 * feat: TTS(Text2Speech) with over 15 languages support! by @tomguluson92 in https://github.com/elizaOS/eliza/pull/2110
 * test: moving uuid.tests to correct __tests__ directory by @ai16z-demirix in https://github.com/elizaOS/eliza/pull/2168
 * tests: coinbase plugin - adding tests for coinbase plugin by @ai16z-demirix in https://github.com/elizaOS/eliza/pull/2170
-* Fix: replace invalid toghether ai medium model by @Jonatan-Chaverri in https://github.com/elizaOS/eliza/pull/2173
+* Fix: replace invalid together ai medium model by @Jonatan-Chaverri in https://github.com/elizaOS/eliza/pull/2173
 * fix: insert missing langdetect on plugin-tts package.json by @rferrari in https://github.com/elizaOS/eliza/pull/2175
 * fix(client-twitter): add mention deduplication utility by @nhodges in https://github.com/elizaOS/eliza/pull/2178
 * feat: 🎈 perf(vscode): Set file nesting for md and DockerFile by @AAAkater in https://github.com/elizaOS/eliza/pull/2177
