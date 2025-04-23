@@ -39,19 +39,13 @@ These components ensure:
 
 ### ROFL Application Configuration
 
-The ROFL application configuration handles the setup and management of the TEE environment. It supports:
+The ROFL application configuration (`rofl.yaml`) defines how your application will be deployed and executed in the TEE environment. The configuration supports different deployment modes:
 
-- Multiple deployment modes:
-    - `testnet`: For development and testing
-    - `mainnet`: For production deployment
+1. **Self-hosted Deployment** (when you run your own node)
+2. **Oasis-sponsored Deployment** (using Oasis-provided infrastructure)
+3. **Third-party Deployment** (using other provider's infrastructure)
 
-Key features:
-- Secure application deployment
-- Configuration management
-- Policy enforcement
-- Resource allocation
-
-Example configuration:
+Here's a comprehensive example configuration:
 
 ```yaml
 name: eliza
@@ -59,11 +53,13 @@ version: 0.11.1
 tee: tdx
 kind: container
 resources:
-  memory: 16384
-  cpus: 1
+  memory: 16384  # Memory in MB (16GB)
+  cpus: 1        # Number of CPU cores
   storage:
     kind: disk-persistent
-    size: 10240
+    size: 10240  # Storage size in MB (10GB)
+
+# Required artifacts for TDX execution
 artifacts:
   firmware: https://github.com/oasisprotocol/oasis-boot/releases/download/v0.4.1/ovmf.tdx.fd#[hash]
   kernel: https://github.com/oasisprotocol/oasis-boot/releases/download/v0.4.1/stage1.bin#[hash]
@@ -71,15 +67,22 @@ artifacts:
   container:
     runtime: https://github.com/oasisprotocol/oasis-sdk/releases/download/rofl-containers%2Fv0.4.2/rofl-containers#[hash]
     compose: rofl-compose.yaml
+
+# Deployment configurations
 deployments:
+  # Default deployment configuration
   default:
-    app_id: [app_address]
-    network: [network]
-    paratime: [paratime]
-    admin: [admin_address]
+    app_id: [app_address]    # Your application's address
+    network: [network]       # Network to deploy to (testnet/mainnet)
+    paratime: [paratime]     # Paratime to use
+    admin: [admin_address]   # Admin address for management
+
+    # Trust root configuration
     trust_root:
-      height: [height]
-      hash: [hash]
+      height: [height]       # Block height
+      hash: [hash]          # Block hash
+
+    # Security policy configuration
     policy:
       quotes:
         pcs:
@@ -87,17 +90,28 @@ deployments:
           min_tcb_evaluation_data_number: 18
           tdx: {}
       enclaves:
-        - [enclave_1]
+        - [enclave_1]        # Required enclave IDs
         - [enclave_2]
       endorsements:
-        - any: {}
-      fees: endorsing_node
-      max_expiration: 3
+        - any: {}           # Endorsement policy
+      fees: endorsing_node  # Fee payment method
+      max_expiration: 3     # Maximum expiration time in days
+
+    # Application secrets
     secrets:
       - name: [secret_name]
         value: [secret_value]
-      [...]
+      # Add more secrets as needed
 ```
+
+Key configuration points:
+- `resources`: Adjust based on your application's needs
+- `artifacts`: Required for TDX execution - do not modify unless you know what you're doing
+- `deployments`: Define different deployment configurations for various environments
+- `policy`: Configure security requirements and attestation policies
+- `secrets`: Manage your application's sensitive data
+
+For more detailed configuration options, refer to the [Oasis ROFL documentation](https://docs.oasis.io/general/manage-tokens/cli/rofl).
 
 ---
 
