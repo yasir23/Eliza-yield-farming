@@ -153,7 +153,7 @@ To set up your environment for TEE development:
 
 2. **Request Testnet Tokens**
 
-    Visit the [Oasis Faucet](https://faucet.testnet.oasis.dev/) to request testnet tokens.
+    Visit the [Oasis Faucet](https://faucet.testnet.oasis.dev/) to request TEST tokens.
 
 3. **Create a ROFL Application**
 
