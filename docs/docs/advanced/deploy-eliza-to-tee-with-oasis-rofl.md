@@ -194,10 +194,28 @@ To set up your environment for TEE development:
     echo -n "3000" | oasis rofl secret set SERVER_PORT -
     # Add other required secrets
     ```
-    
+
     **WARNING:** Secrets are end-to-end encrypted with your account key and an ephemeral key of the chain where it will be deployed to (Testnet or Mainnet). Migrating encrypted secrets from one deployment to another is not possible.
 
-3. **Build the ROFL Application**
+3. **Configure ROFL Resources**
+
+    Adjust the resource allocation in your `rofl.yaml` file to match your application's requirements. This includes memory, CPU, and storage settings:
+
+    ```yaml
+    resources:
+      memory: 16384  # Memory in MB (16GB in this example)
+      cpus: 1        # Number of CPU cores
+      storage:
+        kind: disk-persistent
+        size: 10240  # Storage size in MB (10GB in this example)
+    ```
+
+    Adjust these values based on your specific needs:
+    - `memory`: Set the amount of RAM your application needs (in MB)
+    - `cpus`: Specify the number of CPU cores to allocate
+    - `storage`: Configure persistent storage with the required size
+
+4. **Build the ROFL Application**
 
     For MacOS users, use the following Docker image:
 
@@ -205,21 +223,28 @@ To set up your environment for TEE development:
     docker run --platform linux/amd64 --volume .:/src --rm -it ghcr.io/oasisprotocol/rofl-dev:main oasis rofl build
     ```
 
-4. **Deploy the ROFL Application**
+5. **Deploy the ROFL Application**
 
-    You have two options for deployment:
+    The recommended way to deploy your ROFL application is using the Oasis CLI:
 
-    A. **Run Your Own Oasis Node**
+    ```bash
+    oasis rofl deploy
+    ```
 
-    1. Follow the [Oasis Node Setup Guide](https://docs.oasis.io/node/run-your-node/paratime-client-node)
-    2. Copy the ROFL bundle to your node
-    3. Update your node configuration
-    4. Restart your node
+    This command will:
+    1. Check if you have an existing machine available
+    2. If no machine exists, it will:
+       - Present a list of available providers
+       - Allow you to select a provider and plan for a TDX-capable machine
+       - Handle the payment process for renting the machine
+    3. Deploy your ROFL application to the selected machine
 
-    B. **Deploy to Oasis Provider**
+    You can deploy to:
+    - Your own nodes (if you're the provider)
+    - Oasis-sponsored nodes
+    - Third-party nodes
 
-    1. Upload the ROFL bundle to a public file server
-    2. Contact the Oasis team on [Discord](https://oasis.io/discord) #dev-central channel
+    For more advanced deployment options and configuration, refer to the [Oasis CLI documentation](https://docs.oasis.io/cli/).
 
 ### Verify TEE Deployment
 
