@@ -282,7 +282,7 @@ To set up your environment for TEE development:
     2. If no machine exists, it will:
        - Present a list of available providers
        - Allow you to select a provider and plan for a TDX-capable machine
-       - Handle the payment process for renting the machine
+       - Handle the payment process for renting the machine (Testnet machines can be paid with TEST tokens)
     3. Deploy your ROFL application to the selected machine
 
     You can deploy to:
