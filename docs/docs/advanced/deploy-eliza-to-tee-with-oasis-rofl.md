@@ -54,17 +54,49 @@ Key features:
 Example configuration:
 
 ```yaml
-services:
-  eliza:
-    restart: always
-    image: ghcr.io/elizaos/eliza:latest
-    build:
-      context: .
-      dockerfile: Dockerfile
-    platform: linux/amd64
-    environment:
-      - CHARACTERS=${CHARACTERS}
-      - SERVER_PORT=${SERVER_PORT}
+name: eliza
+version: 0.11.1
+tee: tdx
+kind: container
+resources:
+  memory: 16384
+  cpus: 1
+  storage:
+    kind: disk-persistent
+    size: 10240
+artifacts:
+  firmware: https://github.com/oasisprotocol/oasis-boot/releases/download/v0.4.1/ovmf.tdx.fd#[hash]
+  kernel: https://github.com/oasisprotocol/oasis-boot/releases/download/v0.4.1/stage1.bin#[hash]
+  stage2: https://github.com/oasisprotocol/oasis-boot/releases/download/v0.4.1/stage2-podman.tar.bz2#[hash]
+  container:
+    runtime: https://github.com/oasisprotocol/oasis-sdk/releases/download/rofl-containers%2Fv0.4.2/rofl-containers#[hash]
+    compose: rofl-compose.yaml
+deployments:
+  default:
+    app_id: [app_address]
+    network: [network]
+    paratime: [paratime]
+    admin: [admin_address]
+    trust_root:
+      height: [height]
+      hash: [hash]
+    policy:
+      quotes:
+        pcs:
+          tcb_validity_period: 30
+          min_tcb_evaluation_data_number: 18
+          tdx: {}
+      enclaves:
+        - [enclave_1]
+        - [enclave_2]
+      endorsements:
+        - any: {}
+      fees: endorsing_node
+      max_expiration: 3
+    secrets:
+      - name: [secret_name]
+        value: [secret_value]
+      [...]
 ```
 
 ---
