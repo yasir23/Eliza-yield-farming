@@ -117,7 +117,7 @@ For more detailed configuration options, refer to the [Oasis ROFL documentation]
 
 ### Secret Management
 
-The secret management system handles secure storage and access to sensitive data. It:
+The ROFL secret management system handles secure storage and access to sensitive data. It:
 
 - Encrypts environment variables and secrets
 - Provides seamless access to secrets within TEE via environment variables or files
