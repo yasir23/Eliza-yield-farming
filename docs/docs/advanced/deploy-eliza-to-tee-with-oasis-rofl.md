@@ -145,7 +145,7 @@ Before getting started with Eliza in TEE, ensure you have:
 
 To set up your environment for TEE development:
 
-1. **Create an Oasis Account**
+1. **Create a keypair**
 
     ```bash
     oasis-cli account create --name <account-name>
