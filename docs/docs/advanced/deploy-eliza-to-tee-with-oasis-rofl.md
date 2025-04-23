@@ -194,6 +194,8 @@ To set up your environment for TEE development:
     echo -n "3000" | oasis rofl secret set SERVER_PORT -
     # Add other required secrets
     ```
+    
+    **WARNING:** Secrets are end-to-end encrypted with your account key and an ephemeral key of the chain where it will be deployed to (Testnet or Mainnet). Migrating encrypted secrets from one deployment to another is not possible.
 
 3. **Build the ROFL Application**
 
