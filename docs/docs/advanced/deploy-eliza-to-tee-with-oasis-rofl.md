@@ -286,7 +286,7 @@ To set up your environment for TEE development:
     3. Deploy your ROFL application to the selected machine
 
     You can deploy to:
-    - Your own nodes (if you're the provider)
+    - Your own nodes
     - Oasis-sponsored nodes
     - Third-party nodes
 
