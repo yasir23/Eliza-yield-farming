@@ -287,7 +287,7 @@ To set up your environment for TEE development:
 
     You can deploy to:
     - Your own nodes
-    - Oasis-sponsored nodes
+    - Nodes managed by the Oasis Protocol Foundation
     - Third-party nodes
 
     For more advanced deployment options and configuration, refer to the [Oasis CLI documentation](https://docs.oasis.io/cli/).
