@@ -290,7 +290,7 @@ To set up your environment for TEE development:
     - Nodes managed by the Oasis Protocol Foundation
     - Third-party nodes
 
-    For more advanced deployment options and configuration, refer to the [Oasis CLI documentation](https://docs.oasis.io/cli/).
+    For more advanced deployment options and configuration, refer to the [official ROFL deployment documentation](https://docs.oasis.io/build/rofl/deployment).
 
 ### Verify TEE Deployment
 
