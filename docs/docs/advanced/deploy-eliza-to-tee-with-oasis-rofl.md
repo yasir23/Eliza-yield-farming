@@ -107,7 +107,7 @@ deployments:
 Key configuration points:
 - `resources`: Adjust based on your application's needs
 - `artifacts`: Required for TDX execution - do not modify unless you know what you're doing
-- `deployments`: Define different deployment configurations for various environments
+- `deployments`: Define different deployment configurations for various environments (Raw or Docker compose-based container)
 - `policy`: Configure security requirements and attestation policies
 - `secrets`: Manage your application's sensitive data
 
