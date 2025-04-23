@@ -278,7 +278,7 @@ To set up your environment for TEE development:
     ```
 
     This command will:
-    1. Check if you have an existing machine available
+    1. Check if you have an existing ROFL provider selected and machine available
     2. If no machine exists, it will:
        - Present a list of available providers
        - Allow you to select a provider and plan for a TDX-capable machine
