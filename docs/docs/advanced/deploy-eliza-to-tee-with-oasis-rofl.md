@@ -148,7 +148,7 @@ To set up your environment for TEE development:
 1. **Create a keypair**
 
     ```bash
-    oasis-cli account create --name <account-name>
+    oasis wallet create <account-name>
     ```
 
 2. **Request Testnet Tokens**
