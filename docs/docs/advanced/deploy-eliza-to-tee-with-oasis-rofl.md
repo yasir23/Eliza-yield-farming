@@ -223,15 +223,10 @@ To set up your environment for TEE development:
 
 ### Verify TEE Deployment
 
-Once deployed, you can verify the TEE deployment by:
-
-1. Checking the ROFL application status:
+Once deployed, you can verify whether your ROFL instance is running, the latest logs and the runtime-attestation key:
 
     ```bash
-    oasis rofl show
+    oasis rofl machine show
     ```
-
-2. Monitoring the application logs
-3. Verifying remote attestation
 
 Congratulations! You have successfully deployed Eliza to a TEE environment.
