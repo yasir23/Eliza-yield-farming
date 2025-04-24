@@ -93,7 +93,7 @@ deployments:
         - [enclave_1]        # Required enclave IDs
         - [enclave_2]
       endorsements:
-        - any: {}           # Endorsement policy
+        - any: {}           # Which nodes can run your ROFL
       fees: endorsing_node  # Fee payment method
       max_expiration: 3     # Maximum expiration time in days
 
