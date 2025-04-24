@@ -266,7 +266,7 @@ To set up your environment for TEE development:
     For MacOS users, use the following Docker image:
 
     ```bash
-    docker run --platform linux/amd64 --volume .:/src --rm -it ghcr.io/oasisprotocol/rofl-dev:main oasis rofl build
+    oasis rofl build
     ```
 
 5. **Deploy the ROFL Application**
