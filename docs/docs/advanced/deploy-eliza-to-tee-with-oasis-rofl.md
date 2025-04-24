@@ -185,7 +185,7 @@ echo -n "postgresql://user:password@localhost:5432/eliza" | oasis rofl secret se
 
 Before getting started with Eliza in TEE, ensure you have:
 
-- [Oasis CLI](https://github.com/oasisprotocol/cli/releases) installed
+- [Oasis CLI] installed
 - Docker Desktop or Orbstack (Orbstack is recommended)
 - Testnet tokens from the [Oasis Faucet](https://faucet.testnet.oasis.dev/)
 - A character file for your Eliza agent (you can use the example character file or create your own)
