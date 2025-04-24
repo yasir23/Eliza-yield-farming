@@ -190,6 +190,8 @@ Before getting started with Eliza in TEE, ensure you have:
 - Testnet tokens from the [Oasis Faucet](https://faucet.testnet.oasis.dev/)
 - A character file for your Eliza agent (you can use the example character file or create your own)
 
+[Oasis CLI]: https://github.com/oasisprotocol/cli/releases
+
 ---
 
 ### Environment Setup
