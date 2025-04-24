@@ -109,7 +109,7 @@ deployments:
         id: [machine_id] # ID of the rented machine running your ROFL
 ```
 
-Key configuration points:
+The configuration file above is generated and managed by the [Oasis CLI]. To better understand the bells and whistles behind ROFL however, let's look at the key configuration fields:
 - `resources`: Adjust based on your application's needs
 - `artifacts`: Required for TDX execution - do not modify unless you know what you're doing
 - `deployments`: Define different deployment configurations for various environments (Raw or Docker compose-based container)
