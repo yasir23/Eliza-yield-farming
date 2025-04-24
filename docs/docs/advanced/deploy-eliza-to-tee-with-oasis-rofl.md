@@ -42,7 +42,7 @@ These components ensure:
 The ROFL application configuration (`rofl.yaml`) defines how your application will be deployed and executed in the TEE environment. The configuration supports different deployment modes:
 
 1. **Self-hosted Deployment** (when you run your own node)
-2. **Oasis-sponsored Deployment** (using Oasis-provided infrastructure)
+2. **Oasis-provided Deployment** (using nodes maintained by the Oasis Protocol Foundation)
 3. **Third-party Deployment** (using other provider's infrastructure)
 
 Here's a comprehensive example configuration:
