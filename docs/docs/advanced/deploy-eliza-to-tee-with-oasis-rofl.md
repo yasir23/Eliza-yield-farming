@@ -57,7 +57,7 @@ resources:
   cpus: 1        # Number of CPU cores
   storage:
     kind: disk-persistent
-    size: 10240  # Storage size in MB (10GB)
+    size: 10000  # Storage size in MB (10GB)
 
 # Required artifacts for TDX execution
 artifacts:
