@@ -102,6 +102,11 @@ deployments:
       - name: [secret_name]
         value: [secret_value]
       # Add more secrets as needed
+    machines:
+      default:
+        provider: [provider_address] # Address of the provider hosting your ROFL
+        offer: [offer_name] # Name of the rented plan
+        id: [machine_id] # ID of the rented machine running your ROFL
 ```
 
 Key configuration points:
