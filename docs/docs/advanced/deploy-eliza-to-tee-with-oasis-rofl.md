@@ -45,7 +45,7 @@ The ROFL application configuration (`rofl.yaml`) defines how your application wi
 2. **Oasis-provided Deployment** (using nodes maintained by the Oasis Protocol Foundation)
 3. **Third-party Deployment** (using other provider's infrastructure)
 
-Here's a comprehensive example configuration:
+For illustration, here's a comprehensive example configuration:
 
 ```yaml
 name: eliza
