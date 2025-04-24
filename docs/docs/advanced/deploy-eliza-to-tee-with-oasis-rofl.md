@@ -47,7 +47,7 @@ The ROFL application configuration (`rofl.yaml`) defines how your application wi
 
 For illustration, here's a comprehensive example configuration:
 
-```yaml
+```yaml title="rofl.yaml"
 name: eliza
 version: 0.11.1
 tee: tdx
