@@ -2840,7 +2840,7 @@ Week of December 9th 2024 release, Many bug fixes
 * docs: Create best-practices.md documentation by @snobbee in https://github.com/ai16z/eliza/pull/463
 * feat: Added TWITTER_COOKIE example on quickstart.md by @haeunchin in https://github.com/ai16z/eliza/pull/476
 * feat: Improve knowledge embeddings by @tarrencev in https://github.com/ai16z/eliza/pull/472
-* feat: improve type saftey by @ponderingdemocritus in https://github.com/ai16z/eliza/pull/494
+* feat: improve type safety by @ponderingdemocritus in https://github.com/ai16z/eliza/pull/494
 * fix: improve embeddings by @ponderingdemocritus in https://github.com/ai16z/eliza/pull/496
 * node-v by @ponderingdemocritus in https://github.com/ai16z/eliza/pull/501
 * fix: deps by @ponderingdemocritus in https://github.com/ai16z/eliza/pull/503
@@ -2874,7 +2874,7 @@ Week of December 9th 2024 release, Many bug fixes
 * fix: bump echogarden to fix case sensitive issue by @0xFlicker in https://github.com/ai16z/eliza/pull/561
 * Improved Twitter Documentation by @grallc in https://github.com/ai16z/eliza/pull/559
 * fix: sql command by @0xFlicker in https://github.com/ai16z/eliza/pull/560
-* fix: remove db adapters depencies from core and remove plugin-node from telegram  by @bmgalego in https://github.com/ai16z/eliza/pull/571
+* fix: remove db adapters dependencies from core and remove plugin-node from telegram  by @bmgalego in https://github.com/ai16z/eliza/pull/571
 * fix: add missing documents and knowledge memory managers to runtime interface by @bmgalego in https://github.com/ai16z/eliza/pull/572
 * fix: remove postinstall script from plugin-coinbase by @bmgalego in https://github.com/ai16z/eliza/pull/573
 * fix: postgres by @ponderingdemocritus in https://github.com/ai16z/eliza/pull/557
@@ -2912,7 +2912,7 @@ Week of December 9th 2024 release, Many bug fixes
 * fix: add Memory Manager getMemoriesByRoomIds missing tableName param by @bmgalego in https://github.com/ai16z/eliza/pull/602
 * fix: time prompt to include UTC, convert to verbose english to help prompting by @odilitime in https://github.com/ai16z/eliza/pull/603
 * feat: add knowledge to state by @bmgalego in https://github.com/ai16z/eliza/pull/600
-* feat: Adding tests for actions and generation. Skiping test step in defaultCharacters by @ai16z-demirix in https://github.com/ai16z/eliza/pull/591
+* feat: Adding tests for actions and generation. Skipping test step in defaultCharacters by @ai16z-demirix in https://github.com/ai16z/eliza/pull/591
 * feat: sell simulation service by @MarcoMandar in https://github.com/ai16z/eliza/pull/597
 * fix: use correct getCachedEmbeddings query_field_sub_name by @bmgalego in https://github.com/ai16z/eliza/pull/607
 * fix: knowledge module exporting process by @bmgalego in https://github.com/ai16z/eliza/pull/609
@@ -3104,7 +3104,7 @@ Week of December 9th 2024 release, Many bug fixes
 * docs: Create best-practices.md documentation by @snobbee in https://github.com/ai16z/eliza/pull/463
 * feat: Added TWITTER_COOKIE example on quickstart.md by @haeunchin in https://github.com/ai16z/eliza/pull/476
 * feat: Improve knowledge embeddings by @tarrencev in https://github.com/ai16z/eliza/pull/472
-* feat: improve type saftey by @ponderingdemocritus in https://github.com/ai16z/eliza/pull/494
+* feat: improve type safety by @ponderingdemocritus in https://github.com/ai16z/eliza/pull/494
 * fix: improve embeddings by @ponderingdemocritus in https://github.com/ai16z/eliza/pull/496
 * node-v by @ponderingdemocritus in https://github.com/ai16z/eliza/pull/501
 * fix: deps by @ponderingdemocritus in https://github.com/ai16z/eliza/pull/503
