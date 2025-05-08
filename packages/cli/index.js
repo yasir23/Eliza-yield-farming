@@ -7,7 +7,7 @@ const { Command } = require('commander')
 const program = new Command()
 const { version } = require('./package.json')
 const JSON5 = require('json5')
-const axios = require('axios')
+//const axios = require('axios')
 
 const { buildPluginFromDir, migratePlugin } = require('./lib.migrate')
 
@@ -52,10 +52,10 @@ const pluginsCmd = new Command()
 let metadata = {}
 
 async function getPlugins() {
-  //const resp = await fetch('https://raw.githubusercontent.com/elizaos-plugins/registry/refs/heads/main/index.json')
-  //const mostlyJson = await resp.text();
-  const resp = await axios.get('https://raw.githubusercontent.com/elizaos-plugins/registry/refs/heads/main/index.json')
-  const mostlyJson = resp.data
+  const resp = await fetch('https://raw.githubusercontent.com/elizaos-plugins/registry/refs/heads/main/index.json')
+  const mostlyJson = await resp.text();
+  //const resp = await axios.get('https://raw.githubusercontent.com/elizaos-plugins/registry/refs/heads/main/index.json')
+  //const object = resp.data
   const jsonLike = []
   for(const l of mostlyJson.split('\n')) {
     if (l.match(/""/)) {
@@ -188,7 +188,6 @@ pluginsCmd
 
       if (isV2) {
         console.error('Plugin', plugin, 'not compatible with 0.x, deleting', pkgPath)
-        //const gitOutput = execSync('git clone https://github.com/' + repoData[1] + ' ' + pkgPath, { stdio: 'pipe' }).toString().trim();
         try {
           fs.rmSync(pkgPath, { recursive: true, force: true });
         } catch (err) {
@@ -204,6 +203,7 @@ pluginsCmd
     const packageJsonPath = pkgPath + '/package.json'
     const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'))
 
+    /*
     const updateDependencies = (deps) => {
       if (!deps) return false
       let changed = false
@@ -221,7 +221,6 @@ pluginsCmd
       return changed
     }
 
-    /*
     // normalize @elizaos => @elizaos-plugins
     if (updateDependencies(packageJson.dependencies)) {
       console.log('updating plugin\'s package.json to not use @elizos/ for dependencies')
@@ -229,6 +228,14 @@ pluginsCmd
       // I don't think will cause the lockfile from getting out of date
     }
     */
+    const swapCoreDependencies = (deps) => {
+      console.log('Ensuring plugin\'s core dependencies')
+      delete deps['@elizaos/core']
+      deps['@elizaos/core-plugin-v1'] = 'workspace:*'
+      fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2) + "\n")
+    }
+    swapCoreDependencies(packageJson.dependencies)
+
     const installled = getInstalledPackages(elizaOSroot + '/packages')
     const installedPlugins = installled.filter(p => !packagedPlugins.includes(p))
 
@@ -270,6 +277,29 @@ pluginsCmd
       fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2))
     }
 
+    // now take care of anything inside the source
+    const pluginObj = buildPluginFromDir(pkgPath)
+    migratePlugin(pluginObj)
+
+    // ensure we have all needed NPMs
+    console.log('installing NPMs', elizaOSroot)
+    try {
+      const projectInstallOutput = execSync('pnpm i --no-frozen-lockfile', { cwd: elizaOSroot, stdio: 'pipe' }).toString().trim();
+      //console.log('projectInstallOutput', projectInstallOutput)
+    } catch (e) {
+      console.error('projectInstallOutput error', e)
+    }
+
+    if (pluginObj.hasSrcRefs) {
+      console.log('building plugin', pkgPath)
+      try {
+        const pluginAddAgentOutput = execSync('pnpm build', { cwd: pkgPath, stdio: 'pipe' }).toString().trim();
+        //console.log('pluginAddAgentOutput', pluginAddAgentOutput)
+      } catch (e) {
+        console.error('error', e)
+      }
+    }
+
     // add to agent
     const agentPackageJsonPath = elizaOSroot + '/agent/package.json'
     const agentPackageJson = JSON.parse(fs.readFileSync(agentPackageJsonPath, 'utf-8'));
@@ -283,10 +313,6 @@ pluginsCmd
         console.error('error', e)
       }
     }
-
-    // now take care of anything inside the source
-    const pluginObj = buildPluginFromDir(pkgPath)
-    migratePlugin(pluginObj)
 
     console.log(plugin, 'attempted installation is complete')
     // can't add to char file because we don't know which character
