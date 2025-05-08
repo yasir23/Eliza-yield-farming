@@ -16,15 +16,15 @@ const logger: Record<
   | 'fatal',
   LogMethod
 > & { clear: () => void } = {
-  trace: (args) => coreLogger.trace(...args),
-  debug: (args) => coreLogger.debug(...args),
-  success: (args) => coreLogger.debug(...args),
-  progress: (args) => coreLogger.debug(...args),
-  log: (args) => coreLogger.info(...args),
-  info: (args) => coreLogger.info(...args),
-  warn: (args) => coreLogger.warn(...args),
-  error: (args) => coreLogger.error(...args),
-  fatal: (args) => coreLogger.fatal(...args),
+  trace: (...args) => coreLogger.trace(...args),
+  debug: (...args) => coreLogger.debug(...args),
+  success: (...args) => coreLogger.debug(...args),
+  progress: (...args) => coreLogger.debug(...args),
+  log: (...args) => coreLogger.info(...args),
+  info: (...args) => coreLogger.info(...args),
+  warn: (...args) => coreLogger.warn(...args),
+  error: (...args) => coreLogger.error(...args),
+  fatal: (...args) => coreLogger.fatal(...args),
   clear: () => coreLogger.clear(''), // call with dummy arg to satisfy "at least 1 argument" requirement
 };
 
