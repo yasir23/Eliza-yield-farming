@@ -119,6 +119,10 @@ export class MemoryManager implements IMemoryManager {
       return this._mm.getMemoriesByRoomIds(params);
     }
 
+    async getMemoriesByIds(ids: UUID[]): Promise<Memory[]> {
+        return this._mm.getMemoriesByIds(ids);
+    }
+
     async getMemoryById(id: UUID): Promise<Memory | null> {
       return this._mm.getMemoryById(id);
     }
