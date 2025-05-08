@@ -1,9 +1,14 @@
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
 
 // Configuration
 const OLD_IMPORT = '@elizaos/core';
 const NEW_IMPORT = '@elizaos/core-plugin-v1';
+
+function escapeRegex(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
 
 function buildPluginFromDir(pluginDir) {
   const corePath = path.join(pluginDir, 'node_modules', '@elizaos', 'core');
@@ -14,8 +19,10 @@ function buildPluginFromDir(pluginDir) {
       `grep -r "${OLD_IMPORT}" "${pluginDir}"`,
       { encoding: 'utf-8', stdio: ['pipe', 'pipe', 'ignore'] }
     ).trim();
+    //console.log('buildPluginFromDir', result)
     references = result ? result.split('\n') : [];
   } catch (error) {
+    console.error('lib.migrate::buildPluginFromDir - error', error)
     // grep returns non-zero if no matches, which is not an error for us
     references = [];
   }
@@ -52,20 +59,20 @@ function migratePlugin(plugin) {
 
     for (const ref of plugin.references) {
       const parts = ref.split(':');
-      if (parts.length >= 1) {
-        filesToUpdate.add(parts[0]);
+      if (!parts.length) {
+        continue
       }
-    }
-
-    for (const file of filesToUpdate) {
+      const file = parts.shift()
       try {
         const content = fs.readFileSync(file, 'utf-8');
 
         // Use a regex that will only match the exact string @elizaos/core
         // This prevents double replacements (@elizaos/core-plugin-v1-plugin-v1)
         // Using word boundary \b to ensure we don't replace partial matches
-        const regex = new RegExp(`\\b${OLD_IMPORT}\\b`, 'g');
-        const newContent = content.replace(regex, NEW_IMPORT);
+        // if (content.includes(OLD_IMPORT) && !content.includes(NEW_IMPORT)) {
+        const escapedOldImport = escapeRegex(OLD_IMPORT);
+        const regex = new RegExp(`(from\\s+['"])${escapedOldImport}(['"])`, 'g');
+        const newContent = content.replace(regex, `$1${NEW_IMPORT}$2`);
 
         if (content !== newContent) {
           fs.writeFileSync(file, newContent);
@@ -154,14 +161,9 @@ function migratePlugin(plugin) {
     console.log(`  ✅ Migration actions: ${actionItems.join(', ')}`);
 
     // Additional instructions based on plugin type
-    if (plugin.hasSrcRefs) {
-      console.log(`  ⚠️ This plugin has source code references - rebuild it after migration with 'npm run build'`);
-    }
     if (plugin.hasNodeModulesCore) {
       console.log(`  ⚠️ Remove node_modules and reinstall dependencies to complete migration`);
     }
-  } else {
-    //console.log(`  ⚠️ No changes made to this plugin - manual inspection recommended`);
   }
 
   return results;
