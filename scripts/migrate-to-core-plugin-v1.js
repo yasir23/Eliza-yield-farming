@@ -226,6 +226,35 @@ function main() {
       // Step 1: Migrate references
       const results = migratePlugin(plugin);
 
+      // Summary for this plugin
+      let actionItems = [];
+      if (results.files > 0) {
+        actionItems.push(`replaced references in ${results.files} files`);
+      }
+      if (results.packageJson) {
+        actionItems.push('updated package.json');
+      }
+      if (results.tsupConfig) {
+        actionItems.push('updated tsup.config.ts');
+      }
+      if (results.nodeModules) {
+        actionItems.push('found node_modules that need reinstallation');
+      }
+
+      if (actionItems.length > 0) {
+        //console.log(`  ✅ Migration actions: ${actionItems.join(', ')}`);
+
+        // Additional instructions based on plugin type
+        if (plugin.hasSrcRefs) {
+          console.log(`  ⚠️ This plugin has source code references - rebuild it after migration with 'npm run build'`);
+        }
+        if (plugin.hasNodeModulesCore) {
+          //console.log(`  ⚠️ Remove node_modules and reinstall dependencies to complete migration`);
+        }
+      } else {
+        console.log(`  ⚠️ No changes made to this plugin - manual inspection recommended`);
+      }
+
       migrationStats.filesUpdated += results.files;
       migrationStats.packagesUpdated += results.packageJson ? 1 : 0;
       migrationStats.configsUpdated += results.tsupConfig ? 1 : 0;
