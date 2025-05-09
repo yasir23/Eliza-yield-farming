@@ -2,7 +2,16 @@ import { elizaLogger as coreLogger } from '@elizaos/core';
 import type { LogFn } from 'pino';
 
 // Use actual LogFn parameter types to avoid overload mismatch
-type LogMethod = (inputArgs: Parameters<LogFn>) => void;
+//type AcceptableArg = string | any[] | Record<string, unknown>
+type LogMethod = (...args: any[]) => void;
+type TupleLogMethod = (args: [string, ...any[]]) => void;
+
+// Create a function that adapts a TupleLogMethod to a LogMethod
+function adaptLogMethod(tupleMethod: TupleLogMethod): LogMethod {
+  return function(msg: string, ...args: any[]) {
+    return tupleMethod([msg, ...args]);
+  };
+}
 
 const logger: Record<
   | 'trace'
@@ -16,15 +25,33 @@ const logger: Record<
   | 'fatal',
   LogMethod
 > & { clear: () => void } = {
-  trace: (...args) => coreLogger.trace(...args),
-  debug: (...args) => coreLogger.debug(...args),
-  success: (...args) => coreLogger.debug(...args),
-  progress: (...args) => coreLogger.debug(...args),
-  log: (...args) => coreLogger.info(...args),
-  info: (...args) => coreLogger.info(...args),
-  warn: (...args) => coreLogger.warn(...args),
-  error: (...args) => coreLogger.error(...args),
-  fatal: (...args) => coreLogger.fatal(...args),
+  trace: adaptLogMethod(([msg, ...rest]) => {
+    coreLogger.trace.apply(coreLogger, [msg, ...rest]);
+  }),
+  debug: adaptLogMethod(([msg, ...rest]) => {
+    coreLogger.debug.apply(coreLogger, [msg, ...rest]);
+  }),
+  success: adaptLogMethod(([msg, ...rest]) => {
+    coreLogger.debug.apply(coreLogger, [msg, ...rest]);
+  }),
+  progress: adaptLogMethod(([msg, ...rest]) => {
+    coreLogger.debug.apply(coreLogger, [msg, ...rest]);
+  }),
+  log: adaptLogMethod(([msg, ...rest]) => {
+    coreLogger.info.apply(coreLogger, [msg, ...rest]);
+  }),
+  info:  adaptLogMethod(([msg, ...rest]) => {
+    coreLogger.info.apply(coreLogger, [msg, ...rest]);
+  }),
+  warn:  adaptLogMethod(([msg, ...rest]) => {
+    coreLogger.warn.apply(coreLogger, [msg, ...rest]);
+  }),
+  error:  adaptLogMethod(([msg, ...rest]) => {
+    coreLogger.error.apply(coreLogger, [msg, ...rest]);
+  }),
+  fatal:  adaptLogMethod(([msg, ...rest]) => {
+    coreLogger.fatal.apply(coreLogger, [msg, ...rest]);
+  }),
   clear: () => coreLogger.clear(''), // call with dummy arg to satisfy "at least 1 argument" requirement
 };
 
