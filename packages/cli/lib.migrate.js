@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
 
 // Configuration
 const OLD_IMPORT = '@elizaos/core';
@@ -10,17 +9,42 @@ function escapeRegex(string) {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+
+function findImportOccurrences(dir, searchTerm) {
+  const results = [];
+
+  function walk(currentPath) {
+    const entries = fs.readdirSync(currentPath, { withFileTypes: true });
+
+    for (const entry of entries) {
+      const fullPath = path.join(currentPath, entry.name);
+
+      if (entry.isDirectory()) {
+        walk(fullPath); // recurse into subdirectory
+      } else if (entry.isFile()) {
+        try {
+          const content = fs.readFileSync(fullPath, 'utf8');
+          if (content.includes(searchTerm)) {
+            results.push(fullPath);
+          }
+        } catch (e) {
+          // Optionally log and skip unreadable files
+          console.warn(`Skipping unreadable file: ${fullPath}`);
+        }
+      }
+    }
+  }
+
+  walk(dir);
+  return results;
+}
+
 function buildPluginFromDir(pluginDir) {
   const corePath = path.join(pluginDir, 'node_modules', '@elizaos', 'core');
 
   let references
   try {
-    const result = execSync(
-      `grep -r "${OLD_IMPORT}" "${pluginDir}"`,
-      { encoding: 'utf-8', stdio: ['pipe', 'pipe', 'ignore'] }
-    ).trim();
-    //console.log('buildPluginFromDir', result)
-    references = result ? result.split('\n') : [];
+    references = findImportOccurrences(pluginDir, OLD_IMPORT)
   } catch (error) {
     console.error('lib.migrate::buildPluginFromDir - error', error)
     // grep returns non-zero if no matches, which is not an error for us
