@@ -16,8 +16,23 @@ import {
 import { apiClient } from "@/lib/api";
 import { NavLink, useLocation } from "react-router";
 import type { UUID } from "@elizaos/core";
-import { Book, Cog, User } from "lucide-react";
+import { 
+    BarChart2, 
+    Book, 
+    Cog, 
+    CreditCard, 
+    DollarSign, 
+    Globe, 
+    HelpCircle, 
+    Home,
+    PiggyBank, 
+    RefreshCcw, 
+    Shield, 
+    User, 
+    Users 
+} from "lucide-react";
 import ConnectionStatus from "./connection-status";
+import SymmetrosLogo from "./symmetros-logo";
 
 export function AppSidebar() {
     const location = useLocation();
@@ -36,19 +51,13 @@ export function AppSidebar() {
                     <SidebarMenuItem>
                         <SidebarMenuButton size="lg" asChild>
                             <NavLink to="/">
-                                <img
-                                    alt="elizaos-icon"
-                                    src="/elizaos-icon.png"
-                                    width="100%"
-                                    height="100%"
-                                    className="size-7"
-                                />
+                                <SymmetrosLogo size={28} />
 
                                 <div className="flex flex-col gap-0.5 leading-none">
                                     <span className="font-semibold">
-                                        ElizaOS
+                                        Symmetros
                                     </span>
-                                    <span className="">v{info?.version}</span>
+                                    <span className="text-xs">ESG Vision Fund</span>
                                 </div>
                             </NavLink>
                         </SidebarMenuButton>
@@ -56,15 +65,72 @@ export function AppSidebar() {
                 </SidebarMenu>
             </SidebarHeader>
             <SidebarContent>
+                {/* Main Navigation */}
                 <SidebarGroup>
-                    <SidebarGroupLabel>Agents</SidebarGroupLabel>
+                    <SidebarGroupContent>
+                        <SidebarMenu>
+                            <SidebarMenuItem>
+                                <NavLink to="/">
+                                    <SidebarMenuButton isActive={location.pathname === "/"}>
+                                        <Home className="size-4" /> 
+                                        <span>Dashboard</span>
+                                    </SidebarMenuButton>
+                                </NavLink>
+                            </SidebarMenuItem>
+                            <SidebarMenuItem>
+                                <NavLink to="/farms">
+                                    <SidebarMenuButton isActive={location.pathname.includes("farms")}>
+                                        <PiggyBank className="size-4" /> 
+                                        <span>Yield Farms</span>
+                                    </SidebarMenuButton>
+                                </NavLink>
+                            </SidebarMenuItem>
+                            <SidebarMenuItem>
+                                <NavLink to="/strategies">
+                                    <SidebarMenuButton isActive={location.pathname.includes("strategies")}>
+                                        <RefreshCcw className="size-4" /> 
+                                        <span>Strategies</span>
+                                    </SidebarMenuButton>
+                                </NavLink>
+                            </SidebarMenuItem>
+                            <SidebarMenuItem>
+                                <NavLink to="/swap">
+                                    <SidebarMenuButton isActive={location.pathname.includes("swap")}>
+                                        <CreditCard className="size-4" /> 
+                                        <span>Swap</span>
+                                    </SidebarMenuButton>
+                                </NavLink>
+                            </SidebarMenuItem>
+                            <SidebarMenuItem>
+                                <NavLink to="/portfolio">
+                                    <SidebarMenuButton isActive={location.pathname.includes("portfolio")}>
+                                        <BarChart2 className="size-4" /> 
+                                        <span>Portfolio</span>
+                                    </SidebarMenuButton>
+                                </NavLink>
+                            </SidebarMenuItem>
+                            <SidebarMenuItem>
+                                <NavLink to="/impact">
+                                    <SidebarMenuButton isActive={location.pathname.includes("impact")}>
+                                        <Globe className="size-4" /> 
+                                        <span>ESG Impact</span>
+                                    </SidebarMenuButton>
+                                </NavLink>
+                            </SidebarMenuItem>
+                        </SidebarMenu>
+                    </SidebarGroupContent>
+                </SidebarGroup>
+
+                {/* AI Agents */}
+                <SidebarGroup>
+                    <SidebarGroupLabel>AI Agents</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
                             {query?.isPending ? (
                                 <div>
                                     {Array.from({ length: 5 }).map(
                                         (_, _index) => (
-                                            <SidebarMenuItem key={"skeleton-item"}>
+                                            <SidebarMenuItem key={`skeleton-item-${_index}`}>
                                                 <SidebarMenuSkeleton />
                                             </SidebarMenuItem>
                                         )
@@ -83,7 +149,7 @@ export function AppSidebar() {
                                                             agent.id
                                                         )}
                                                     >
-                                                        <User />
+                                                        <User className="size-4" />
                                                         <span>
                                                             {agent.name}
                                                         </span>
@@ -98,22 +164,36 @@ export function AppSidebar() {
                     </SidebarGroupContent>
                 </SidebarGroup>
             </SidebarContent>
+
             <SidebarFooter>
                 <SidebarMenu>
                     <SidebarMenuItem>
-                        <NavLink
-                            to="https://elizaos.github.io/eliza/docs/intro/"
-                            target="_blank"
-                        >
+                        <NavLink to="/community">
                             <SidebarMenuButton>
-                                <Book /> Documentation
+                                <Users className="size-4" /> Community
                             </SidebarMenuButton>
                         </NavLink>
                     </SidebarMenuItem>
                     <SidebarMenuItem>
-                        <SidebarMenuButton disabled>
-                            <Cog /> Settings
-                        </SidebarMenuButton>
+                        <NavLink to="/docs">
+                            <SidebarMenuButton>
+                                <Book className="size-4" /> Documentation
+                            </SidebarMenuButton>
+                        </NavLink>
+                    </SidebarMenuItem>
+                    <SidebarMenuItem>
+                        <NavLink to="/support">
+                            <SidebarMenuButton>
+                                <HelpCircle className="size-4" /> Support
+                            </SidebarMenuButton>
+                        </NavLink>
+                    </SidebarMenuItem>
+                    <SidebarMenuItem>
+                        <NavLink to="/settings">
+                            <SidebarMenuButton>
+                                <Cog className="size-4" /> Settings
+                            </SidebarMenuButton>
+                        </NavLink>
                     </SidebarMenuItem>
                     <ConnectionStatus />
                 </SidebarMenu>

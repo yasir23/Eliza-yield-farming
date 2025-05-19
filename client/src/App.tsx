@@ -8,6 +8,8 @@ import { BrowserRouter, Route, Routes } from "react-router";
 import Chat from "./routes/chat";
 import Overview from "./routes/overview";
 import Home from "./routes/home";
+import Farms from "./routes/farms";
+import Impact from "./routes/impact";
 import useVersion from "./hooks/use-version";
 
 const queryClient = new QueryClient({
@@ -36,6 +38,15 @@ function App() {
                                 <div className="flex flex-1 flex-col gap-4 size-full container">
                                     <Routes>
                                         <Route path="/" element={<Home />} />
+                                        <Route path="/farms" element={<Farms />} />
+                                        <Route path="/impact" element={<Impact />} />
+                                        <Route path="/strategies" element={<div className="p-4">Strategy page coming soon</div>} />
+                                        <Route path="/swap" element={<div className="p-4">Swap page coming soon</div>} />
+                                        <Route path="/portfolio" element={<div className="p-4">Portfolio page coming soon</div>} />
+                                        <Route path="/docs" element={<div className="p-4">Documentation coming soon</div>} />
+                                        <Route path="/community" element={<div className="p-4">Community page coming soon</div>} />
+                                        <Route path="/support" element={<div className="p-4">Support page coming soon</div>} />
+                                        <Route path="/settings" element={<div className="p-4">Settings page coming soon</div>} />
                                         <Route
                                             path="chat/:agentId"
                                             element={<Chat />}
